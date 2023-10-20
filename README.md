@@ -6,4 +6,4 @@ during my presentation. If you have any questions, [email me](weberr@farmingdale
 
 
 To run the model you will need to use the free program, 
-[NetLogo](ttps://ccl.northwestern.edu/netlogo/download.shtml).
+[NetLogo](https://ccl.northwestern.edu/netlogo/download.shtml).
