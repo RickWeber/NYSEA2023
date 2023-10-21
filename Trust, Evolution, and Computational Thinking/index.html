@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Trust, Evolution, and Computational Thinking</title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/solarized.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
+
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<style>
+
+```css
+@media print {
+  hr {
+    page-break-after: always;
+  }
+}
+```
+
+.color-text{
+color: #993300;
+}
+
+
+	.footnote{font-size: large}
+
+</style>
+
+# Trust, Evolution, and Computational Thinking
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+This slide and materials are available at https://github.com/RickWeber/NYSEA2023
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Part I: relevance for *you and me*
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## What do you remember from your undergrad experience?
+
+* facts
+* skills
+* beliefs
+* modes of thinking
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## What are we really providing our students?
+- A mix of skills, beliefs, and ways of thinking are the lasting contribution of our schooling. 
+	- They can look up the facts as they need them.
+- Hopefully we’re helping them learn to think more clearly about complex systems.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-image="https://upload.wikimedia.org/wikipedia/commons/0/04/Keynes_1933.jpg" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<style>
+
+
+.color-text{
+color: #993300;
+}
+
+
+</style>
+
+
+> Economics is a method rather than a doctrine, an apparatus of the mind, a technique of thinking which helps its possessor to draw correct conclusions. <!-- .element: class="color-text" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-image="https://upload.wikimedia.org/wikipedia/commons/0/04/Keynes_1933.jpg" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<style>
+
+
+.color-text{
+color: #993300;
+}
+
+
+</style>
+
+
+> The master-economist must possess a rare combination of gifts .... He must be mathematician, historian, statesman, philosopher... [computer scientist, statistician, etc.] <!-- .element: class="color-text" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-image="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Vulpes_vulpes_ssp_fulvus.jpg/1280px-Vulpes_vulpes_ssp_fulvus.jpg" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Ways of thinking
+* The Economic way of thinking is incredibly powerful.
+* There are lots of ways of thinking, and they're often complementary. (Mathematical thinking, statistical thinking, design thinking, etc.)
+* Pluralism is good. And **we can replicate it our own heads.**
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Computational Thinking
+(Many) computer scientists are basically economists asking questions about how to manage a scarcity of:
+- data availability and quality
+- storage size
+- storage reliability
+- computational capacity
+- network capacity
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Evolutionary thinking
+
+- Markets are evolutionary processes
+	- but students often have a limited handle on the concept of evolution beyond the over-simplified "survival of the fittest".  
+- Computational models often lend themselves to the use of the Genetic Algorithm.
+	- Simulator’s prerogative: stop/start/inspect the model 
+	- See the evolutionary process unfold in real time
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Covering Neoclassical Blindspots
+
+- A common trope among scholars of Emergence<sup id="fnref:1" role="doc-noteref">1</sup>is how [ants](https://www.youtube.com/watch?v=16W7c0mb-rE) are individually stupid but collectively brilliant.
+- Neoclassical economics runs into the opposite problem: individually brilliant individuals who get trapped in Prisoners’ Dilemmas
+
+
+
+<div class="footnotes" role="doc-endnotes">
+<ol>
+<li id="fn:1" role="doc-endnote" class="footnote"><p>
+
+Not all of them know it, but they're implicitly thinking computationally already
+
+</p></li></ol>
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Econ students need computer science
+#### Even if we have to ditch the computer
+
+- [Computational thinking is more about thinking than computing](https://link.springer.com/article/10.1007/s41979-020-00030-2)
+- Students should learn computer skills, but the bigger value is how it lets you see the underlying logic of a situation
+- All of the coding skills I’ve learned and forgot are still useful because they’ve expanded my thinking tool kit.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## How can we get some of that in Principles?
+
+- [One place to start](https://github.com/RickWeber/SnD) is playing around with computational versions of a model we already know and love.
+- Bonus: the descriptive stories we tell about (e.g.) shortages are really computational stories.
+	- People get signals about the state of the world, adjust their behavior, and change the state of the world through their actions.
+	- (I'm guessing Clair Smith will tell us this story in session D1.)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Okay, so what are we doing?
+- 2.5-minute crash course in computational thinking.
+- See a small sample of economic issues that Computer Science sheds light on.
+- Then we'll look at a computational model of trust.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Part II: Crash course in computation
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### What is computation?
+
+From *The Art of Computer Programming*'s index:
+
+<img src="1 Projects and Tasks/NYSEA 2023/IMG_5194 1.jpeg" alt="" style="object-fit: scale-down">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Computation is just data-in-data-out
+
+There are abstract models of computation like *Turing Machines* and *Lambda Calculus*. 
+
+For our purposes:
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->take some input,
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->process it according to some rules, and
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->ultimately<sup id="fnref:1" role="doc-noteref">1</sup>generate output (e.g. some change within the computer or the world it occupies).
+
+
+
+<div class="footnotes" role="doc-endnotes">
+<ol>
+<li id="fn:1" role="doc-endnote" class="footnote"><p>
+
+Many possible computations might take longer than the lifespan of the universe to finish computing. <!-- .element: class="footnote" -->
+
+</p></li></ol>
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-image="https://blog.datawrapper.de/wp-content/uploads/2021/06/game-of-life-loop-cropped.gif" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Computational Equivalence
+
+Even incredibly simple systems like Cellular Automata can be used for sophisticated calculations like [computing prime numbers](https://www.wolframscience.com/nks/p640--computations-in-cellular-automata/).
+
+Any system that is "Turing complete"<sup id="fnref:2" role="doc-noteref">1</sup>is [Turing equivalent](https://www.wolframscience.com/nks/chap-11--the-notion-of-computation/) to any other Turing complete system: given enough time, any Turing complete system is capable of simulating any other.
+
+
+
+<div class="footnotes" role="doc-endnotes">
+<ol>
+<li id="fn:2" role="doc-endnote" class="footnote"><p>
+
+which turns out to be a [surprisingly low bar](https://www.youtube.com/watch?v=uNjxe8ShM-8&pp=ygUacG93ZXJwb2ludCB0dXJpbmcgY29tcGxldGU%3D). <!-- .element: class="footnote" -->
+
+</p></li></ol>
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Computational irreduceability
+
+One of the early findings of Computer Science is that we can't count on finding a shortcut for any but the simplest programs. **We just have to run through "the program"** to see what happens.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Caveat
+When we create a computational model, we're inventing a little world and hoping it corresponds to the real world, just like when we're using equation-based models. As always, buyer beware!
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## But Humans aren't just computers!
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->[We probably are](https://www.scotthyoung.com/blog/2023/07/25/the-mind-is-a-computer/).
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Even so, we can get started and hold constant the ineffable while we continue learning how the human mind works. 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->"any system whatsover--can be viewed as performing a computation that determines what its future behavior will be." ([Wolfram](https://www.wolframscience.com/nks/p641--computations-in-cellular-automata/))
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Computational Biology
+
+> **Earth** was a giant supercomputer designed to find the Ultimate Question of Life, the Universe and Everything. Designed by Deep Thought and built by the Magratheans, it was commonly mistaken for a planet, especially by the ape descendants who lived on it. It was situated far out in the uncharted backwaters of the unfashionable end of the Western Spiral Arm of the Galaxy).
+
+[The Hitchhiker's Guide to the Galaxy](https://hitchhikers.fandom.com/wiki/Earth)
+</div></script></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Question: could a powerful enough  computer realize LaPlace's vision?
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Laplace%2C_Pierre-Simon%2C_marquis_de.jpg" alt="Portrait of LaPlace linked from Wikipedia" style="object-fit: scale-down">
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Question: could a powerful enough  computer realize LaPlace's vision?
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Yes, but the computer would have to be bigger than the universe it's modeling. 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->It's like Borges' cartographers but worse! (but it might be a smaller problem than those of [Borges' library](https://libraryofbabel.info/bookmark.cgi?library_of_babel_wikipedia_entry))
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Moral of the story:** no matter how much we learn, there's always room for mystery.
+</div></script></section></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Part III: parallels in econ
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Examples
+
+- The Socialist Calculation Debate
+	- Markets are "computationally irreducible"
+	- You have no way to compute equilibrium faster or more effectively than the market itself (a distributed parallel computer that calculates the relative scarcity of exchangeable goods).
+	- Econ's parallel to Turing's Halting Problem and Godel's Undecidability Proof.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Examples
+
+- Markets as a discovery procedure (entrepreneurship as “search” in a many-dimensional space)
+- Bounded rationality (e.g. modeling heuristics-based behavior rather than optimization)
+	- (Seeing a simple case of machine learning with a simple agent is a valuable inoculant for AI snake oil sales pitches)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Examples
+- Strategic interactions (e.g. Industrial Organization)
+- [Finance](https://www.santafe.edu/research/results/working-papers/technical-trading-creates-a-prisoners-dilemma-resu) with heterogeneous agents (answering question: why do people keep doing technical investing instead of fundamental analysis?)
+- Evolution of cooperation (i.e. computational political economy)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Part IV: Evolution of Cooperation
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Prisoners' Dilemma
+- The Prisoners' Dilemma (PD) is as concise a formulation of civilization as I could hope for: 
+	- variable-sum game that requires two people to choose between cooperation and conflict.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## One-shot solution
+
+### DEFECT, DEFECT
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->But life isn't one-shot, it's iterated!
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Iterated solution
+
+- It depends... but [it's probably tit-for-tat](https://en.wikipedia.org/wiki/The_Evolution_of_Cooperation).
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Let’s see it in action
+
+- We'll see a NetLogo implementation that you're free to mess with at home.
+- Nicky Case has a great (simpler) version in the form of an [interactive webpage](https://www.santafe.edu/research/results/working-papers/technical-trading-creates-a-prisoners-dilemma-resu) at ncase.me/trust
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Evolutionary Dynamics in a Prisoners' Dilemma
+
+<img src="1 Projects and Tasks/NYSEA 2023/Pasted image 20231020140255.png" alt="" style="object-fit: scale-down">
+
+Lindgren, 1992 ([p. 303](https://www.researchgate.net/profile/Kristian-Lindgren-2/publication/258883366_Evolutionary_Phenomena_in_Simple_Dynamics/links/0046352950fda06713000000/Evolutionary-Phenomena-in-Simple-Dynamics.pdf))
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Part IV: Where now?
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## What have we seen?
+
+- Computation is a relatively abstract property--we don't need sophisticated computers to do sophisticated computation.
+- Social systems (e.g. markets) are computational systems in their own right.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## What have we seen?
+
+- Computational modeling can help build understanding about processes that affect economic life.
+- This understanding is critical for students to understand the world they’re graduating into.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Explore/Exploit
+When knowledge is scarce, start by exploring. Once you've got the lay of the land, exploit that knowledge to whatever your ends are.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Recommended reading
+
+- [Evolution of Trust interactive web app](ncase.me/trust)
+- [*The Selfish Gene*](https://en.wikipedia.org/wiki/The_Selfish_Gene)
+- [*Algorithms to Live By*](https://algorithmstoliveby.com/)
+- [*Complex Adaptive Systems*](https://press.princeton.edu/books/paperback/9780691127026/complex-adaptive-systems) 
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->[*The Hitchhiker's Guide to the Galaxy* ](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy)
+	- It's a beach read, but try reading it after some of the others.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Diving Deeper
+- [A New Kind of Science](https://www.wolframscience.com/nks/p231--four-classes-of-behavior/) by Stephen Wolfram
+- [Leigh Tesfatsion's webpage](https://www2.econ.iastate.edu/tesfatsi/ace.htm)
+- [Complexity Explorer](https://www.complexityexplorer.org/courses/101-introduction-to-agent-based-modeling) from [the Santa Fe Institute](https://santafe.edu/research/projects)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### This presentation including links and model
+
+* https://github.com/RickWeber/NYSEA2023
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Thank you
+
+### Questions/comments: 
+
+weberr@farmingdale.edu
+
+https://github.com/RickWeber/NYSEA2023
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+	<script src="plugin/elapsed-time-bar/elapsed-time-bar.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
+		  ElapsedTimeBar
+        ],
+
+
+    	allottedTime: 120 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+			]
+		},
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":700,"margin":0.04,"controls":true,"progress":true,"slideNumber":false,"transition":"slide","transitionSpeed":"default"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+
+  <!-- created with Advanced Slides -->
+</html>
