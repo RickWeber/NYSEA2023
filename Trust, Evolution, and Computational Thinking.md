@@ -1,0 +1,1 @@
+/home/rick/Documents/Personal/1 Projects and Tasks/NYSEA 2023/Trust, Evolution, and Computational Thinking.md
